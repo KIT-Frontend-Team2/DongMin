@@ -104,9 +104,15 @@ useEffect는 두번째 인수로 dependency list를 받고, 하나의 값이라�
   }
 })()
  ```
+<<<<<<< Updated upstream
 > 사용법  
 > <br> &ensp; const [state, setState] = useState(initialState); 
 > <br> &ensp; 밑에 식과 마찬가지로 이벤트함수에 연결해서 많이 사용한다.
+=======
+> ##  사용법  
+><br> &ensp;const [state, setState] = useState(initialState); 
+><br> &ensp;밑에 식과 마찬가지로 이벤트함수에 연결해서 많이 사용한다.
+>>>>>>> Stashed changes
 ```
 export default function Profile () {
     const [name,setName] = useState('');
@@ -241,3 +247,9 @@ function TextInput() {
 }
 
 export default TextInput;```
+
+git remote add origin https://github.com/jangdm37/KIT-Frontend-Team2/DongMin.git
+
+KIT-Frontend-Team2/DongMin
+
+---
