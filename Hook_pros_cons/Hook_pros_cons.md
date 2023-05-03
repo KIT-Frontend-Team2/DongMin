@@ -104,15 +104,12 @@ useEffect는 두번째 인수로 dependency list를 받고, 하나의 값이라�
   }
 })()
  ```
-<<<<<<< Updated upstream
-> 사용법  
-> <br> &ensp; const [state, setState] = useState(initialState); 
-> <br> &ensp; 밑에 식과 마찬가지로 이벤트함수에 연결해서 많이 사용한다.
-=======
 > ##  사용법  
 ><br> &ensp;const [state, setState] = useState(initialState); 
 ><br> &ensp;밑에 식과 마찬가지로 이벤트함수에 연결해서 많이 사용한다.
->>>>>>> Stashed changes
+> 사용법  
+> <br> &ensp; const [state, setState] = useState(initialState); 
+> <br> &ensp; 밑에 식과 마찬가지로 이벤트함수에 연결해서 많이 사용한다.
 ```
 export default function Profile () {
     const [name,setName] = useState('');
@@ -246,10 +243,123 @@ function TextInput() {
   );
 }
 
-export default TextInput;```
+export default TextInput;
+```
 
-git remote add origin https://github.com/jangdm37/KIT-Frontend-Team2/DongMin.git
-
-KIT-Frontend-Team2/DongMin
 
 ---
+
+## useMemo
+
+>  함수형 컴포넌트에서 메모이제이션(결과 값을 저장하여 중복 계산을 방지하는 기법)을 구현할 수 있도록 도와주는 훅입니다.(캐시에서 꺼내서 사용)
+
+
+<br> useMemo를 사용하면 렌더링 성능을 개선할 수 있지만, 장단점이 있습니다.
+
+> 장점:
+
+성능 최적화: useMemo를 사용하면 복잡한 연산이나 계산이 많이 필요한 함수의 결과 값을 메모이제이션하여 불필요한 재계산을 방지할 수 있습니다. 이를 통해 렌더링 성능이 개선됩니다.
+참조 일관성 유지: useMemo를 사용하면 연산 결과가 변경되지 않았다면, 이전 결과의 참조를 유지할 수 있습니다. 이를 통해 컴포넌트 렌더링 간의 일관성을 유지할 수 있습니다.
+리렌더링 최소화: useMemo를 사용하면, 연산 결과가 변경되지 않았다면 컴포넌트를 리렌더링하지 않고 이전 결과를 사용할 수 있습니다. 이를 통해 불필요한 리렌더링을 최소화할 수 있습니다.
+
+> 단점:
+
+코드 복잡성 증가: useMemo를 사용하면 코드가 복잡해질 수 있습니다. 특히, 과도한 메모이제이션 사용으로 인해 코드의 가독성이 떨어질 수 있습니다.
+메모리 사용량 증가: useMemo는 연산 결과를 메모리에 저장하므로, 메모이제이션을 과도하게 사용하면 메모리 사용량이 증가합니다. 이는 애플리케이션의 전반적인 성능에 영향을 줄 수 있습니다.
+성능 최적화의 오용: useMemo를 불필요한 경우에 사용하면, 오히려 성능이 저하될 수 있습니다. 메모이제이션 오버헤드로 인해 성능이 오히려 떨어질 수 있으므로, 성능이 중요한 부분에서만 사용하는 것이 좋습니다.
+
+<br>
+
+> useMemo의 소스코드
+```
+function useMemo(create, deps) {
+  const dispatcher = resolveDispatcher();
+  return dispatcher.useMemo(create, deps);
+}
+
+useMemo(create, deps) {
+  const hook = updateMemo();
+
+  const nextDeps = deps !== undefined ? deps : null;
+  
+  if (hook.memoizedState !== null) {
+    const prevDeps = hook.memoizedState[1];
+
+    if (areHookInputsEqual(nextDeps, prevDeps)) {
+      return hook.memoizedState[0];
+    }
+  }
+
+  const nextValue = create();
+  hook.memoizedState = [nextValue, nextDeps];
+  return nextValue;
+}
+```
+
+ 의존성 배열이 변경되거나 처음 호출된 경우, create 함수를 호출하여 새 결과 값을 계산합니다. 이 값을 hook.memoizedState에 저장하고 반환합니다.
+
+useMemo의 소스 코드는 의존성 배열의 변경 여부를 확인하고, 필요한 경우 결과 값을 메모이제이션하여 성능 최적화를 도와주는 방식으로 구성되어 있습니다
+
+
+>  useMemo의 사용법 <br>
+
+> ```const memoizedValue = useMemo(()=>computeExpensiveValue(a,b),[a,b])```
+
+```
+const value = useMemo(()=>{
+    return calculate();
+},[item])
+```
+
+<br>
+
+```
+
+import React, { useState, useMemo } from 'react';
+
+const calculateAverage = (numbers) => {
+  console.log('평균값 계산...');
+  if (numbers.length === 0) return 0;
+  const sum = numbers.reduce((a, b) => a + b);
+  return sum / numbers.length;
+};
+
+function Average() {
+  const [list, setList] = useState([]);
+  const [number, setNumber] = useState('');
+
+  const onChange = (e) => {
+    setNumber(e.target.value);
+  };
+
+  const onInsert = () => {
+    const nextList = list.concat(parseInt(number));
+    setList(nextList);
+    setNumber('');
+  };
+
+  const avg = useMemo(() => calculateAverage(list), [list]);
+
+  return (
+    <div>
+      <input value={number} onChange={onChange} />
+      <button onClick={onInsert}>등록</button>
+      <ul>
+        {list.map((value, index) => (
+          <li key={index}>{value}</li>
+        ))}
+      </ul>
+      <div>
+        <b>평균값:</b> {avg}
+      </div>
+    </div>
+  );
+}
+
+export default Average;
+
+```
+
+이 예제에서 calculateAverage 함수는 숫자 목록의 평균값을 계산하는 함수입니다. 이 함수가 불필요하게 여러 번 호출되는 것을 방지하기 위해 useMemo를 사용합니다.
+
+list 상태가 변경될 때마다 useMemo의 의존성 배열에 있는 list가 업데이트되고, calculateAverage 함수가 호출되어 평균값을 계산합니다. list 상태가 변경되지 않는 한, useMemo는 이전에 계산된 평균값을 반환합니다. 이를 통해 불필요한 재계산을 방지하고 성능을 최적화할 수 있습니다.
