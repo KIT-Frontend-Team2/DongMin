@@ -216,7 +216,7 @@ current의 값을 변경해도 re-render가 되지 않습니다.
 
 > ### 사용법
 > useRef에서는 객체로 반환되어 console.log을 찍어보면 current라는 키값에 값이 담겨져 있다.<br>
-> 따라서 inputRef.current 이러한 방식으로 값을 불러오면 된다.
+> 따라서 inputRef.current 
 
 ```import React, { useRef } from 'react';
 
