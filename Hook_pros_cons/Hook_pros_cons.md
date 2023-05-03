@@ -7,7 +7,8 @@
 
 <br>
 <br>
-### 리액트 특징을 훅함수는 최대한 활용하 것
+
+### 리액트 특징을 훅함수는 최대한 활용한 것
 - 선언적 (Declarative)이다<br>
 👉🏻 리액트는 대화형 UI를 작성하기에 유리하다. 데이터가 변경되었을 때 효율적으로 렌더링을 수행할 수 있도록 한다.
 - 컴포넌트 기반(Component-based)이다<br>
@@ -30,6 +31,7 @@
 
 - HOC 헬을 벗어 날 수 있다.
 <br>
+
 ( HOC헬이란?
 ```
 <Hoc1>
@@ -42,7 +44,9 @@
     </WithMousePosition>
 </Hoc1>
 ```
+
 ## 훅 함수를 활용한 렌더링
+
 ```
 const WithHook = () => {
   const mousePosition = useMousePosition()
@@ -59,6 +63,7 @@ const WithHook = () => {
 ```
 }
 )
+ 
 ## Hook의 단점
 
 - ### 호출되는 순서에 의존
@@ -99,9 +104,9 @@ useEffect는 두번째 인수로 dependency list를 받고, 하나의 값이라�
   }
 })()
  ```
-> ## 사용법  
-><br> &ensp;const [state, setState] = useState(initialState); 
-><br> &ensp;밑에 식과 마찬가지로 이벤트함수에 연결해서 많이 사용한다.
+> 사용법  
+> <br> &ensp; const [state, setState] = useState(initialState); 
+> <br> &ensp; 밑에 식과 마찬가지로 이벤트함수에 연결해서 많이 사용한다.
 ```
 export default function Profile () {
     const [name,setName] = useState('');
@@ -151,7 +156,7 @@ useRef(매개변수)라는 함수를 호출하면 plain JavaScript object를 ret
 이렇게 useRef()를 호출해서 만들어진 object는 그 컴포넌트의 전체 라이프사이클 동안 유지가 됩니다.<br>
 current의 값을 변경해도 re-render가 되지 않습니다.
 
-> #### useRef 소스코드
+> useRef 소스코드
 ```
     function useRef(initialValue) {
   const fiber = currentlyRenderingFiber;
