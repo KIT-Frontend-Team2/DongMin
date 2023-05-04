@@ -524,7 +524,7 @@ useEffect ( () => {
 3. deps에 특정 변수를 줄 경우
 -> (cntA가 변할때만) render하고 clean-up function이 불리고, useEffect 내부가 호출된다. 
 useEffect(() => {
-    console.log("useEffect First!");
+    console.log("useEffect First!")
     console.log(`inner stateA = ${cntA}`);
     console.log(`inner stateA = ${cntB}`);
     return () => {
