@@ -4,6 +4,7 @@ import { useState,useRef } from 'react';
 export default function Ref() {
     const [count, setCount] = useState(0);
     const refCount = useRef(0);
+    console.log("이게 무엇이냐",refCount)
     const AddRefCount=()=>{
         refCount.current = refCount.current +1
         console.log('마이너스 Ref : ' ,refCount.current)
@@ -33,7 +34,7 @@ export default function Ref() {
                 <button onClick={stopCounter}>정지</button>
             </div>
             <div>
-                <p>useState 카운트: {refCount.current}</p>
+                <p>useRef 카운트: {refCount.current}</p>
                 <button onClick={AddRefCount}>시작</button>
                 <button onClick={MinusRefCount}>정지</button>
             </div>
