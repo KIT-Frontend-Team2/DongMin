@@ -174,6 +174,107 @@ const LoginForm = () => {
 
 
 
+-------
+
+<br><br><br><br>
+
+- ### mode: 폼 제출 전 검증 전략입니다.
+    옵션: 'onSubmit'(기본값), 'onBlur', 'onChange', 'onTouched', 'all'
+
+```
+const { register, handleSubmit } = useForm({
+  mode: "onChange",
+});
+
+<input {...register("username", { required: true })} />
+
+```
+- ### onSubmit: 제출 시 유효성 검사를 수행합니다.
+- ### onBlur: 필드가 포커스를 잃을 때마다 유효성 검사를 수행합니다.
+- ### onChange: 입력 값이 변경될 때마다 유효성 검사를 수행합니다.
+- ### onTouched: 필드가 한 번 이상 터치된 경우 유효성 검사를 수행합니다.
+- ### all: 모든 이벤트에 대해 유효성 검사를 수행합니다.
+- ### reValidateMode: 폼 제출 후 검증 전략입니다.
+- ### 옵션: 'onSubmit'(기본값), 'onBlur', 'onChange'
+
+```
+const { register, handleSubmit } = useForm({
+  reValidateMode: "onBlur",
+});
+
+<input {...register("username", { required: true })} />
+defaultValues: 폼의 기본값입니다. 초기 값으로 설정하고 싶은 필드 값들을 객체 형태로 전달합니다.
+javascript
+Copy code
+const { register } = useForm({
+  defaultValues: {
+    firstName: "John",
+    lastName: "Doe",
+  },
+});
+
+<input {...register("firstName")} />
+<input {...register("lastName")} />
+
+```
+- ### values: 폼 값 업데이트를 위한 반응형 값입니다. 이 옵션은 주로 외부 상태 관리 라이브러리와 함께 사용됩니다.
+
+- ### resetOptions: 새로운 폼 값 업데이트 시 폼 상태 재설정 옵션입니다. 폼 상태를 재설정하려면 reset 메서드를 사용합니다.
+
+```
+const { reset } = useForm();
+
+reset({ firstName: "", lastName: "" });
+criteriaMode: 한 번에 모든 검증 오류를 표시하거나 한 번에 하나씩 표시합니다.
+옵션: 'firstError'(기본값), 'all'
+javascript
+Copy code
+const { register, errors } = useForm({
+  criteriaMode: "all",
+});
+
+<input {...register("username", { required: true, minLength: 5 })} />
+shouldFocusError: 내장 포커스 관리 기능을 활성화 또는 비활성화합니다. 기본값은 true입니다.
+javascript
+Copy code
+const { register } = useForm({
+  shouldFocusError: false,
+});
+
+<input {...register("username", { required: true })} />
+
+```
+- ### delayError: 오류가 즉시 나타나지 않도록 지연시킵니다. 이 옵션은 주로 'onChange' 또는 'onBlur' 모드에서 사용됩니다.
+
+- ### shouldUseNativeValidation: 브라우저 내장 폼 제약 API를 사용하도록 합니다. 기본값은 false입니다.
+
+```
+const { register } = useForm({
+  shouldUseNativeValidation: true,
+});
+
+<input {...register("username", { required: "이름을 입력해주세요." })} />
+
+```
+
+- ### shouldUnregister: 입력 필드가 마운트 해제된 후 등록 해제를 활성화 또는 비활성화합니다. 기본값은 true입니다.
+
+```
+
+const { register } = useForm({
+  shouldUnregister: false,
+});
+
+<input {...register("username", { required: true })} />
+
+```
+
+
+
+
+
+
+
 
 
 
