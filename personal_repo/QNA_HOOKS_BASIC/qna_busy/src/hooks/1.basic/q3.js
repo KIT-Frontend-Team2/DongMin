@@ -1,5 +1,5 @@
 import Q3components from "../../components/1.basic/q3components";
-
+import { useEffect, useState } from "react";
 function Q3() {
   /* 
     문제3
@@ -21,18 +21,44 @@ function Q3() {
     해당 컴포넌트는 보이지 않아야하며, 줄넘기 횟수도 더이상 증가해서는 안됩니다.
     또한, 줄넘기 횟수는 0으로 고정되어야합니다.
   */
+  const[count,setCount] = useState(0)
+  const [hide,setHide] =useState(true)
+  const hideBtn = () =>{
+    setHide(!hide)
+  }
+  useEffect(()=>{
+  //  if (hide ===false){
+  //   let jump = setInterval(()=>{
+  //     setCount(count+1)
+  //   },2000)}
+    
+  //   return()=>{
+  //       setCount(0)
+  //       clearInterval(jump)
+      
+  //   }
+  const intervalId = setInterval(() => {
+      setCount(count+1)
+}, 2000);
+  return () => {
+    // setCount(0)
+    clearInterval(intervalId);
+  };
+    
+  })
 
   return (
     <>
       <h1>문제3</h1>
       <div>
-        <p> 줄넘기 횟수 : 0 </p>
-        <Q3components />
+        <p> 줄넘기 횟수 : {hide ===false ? count :0 } </p>
+        {hide ===false ? <Q3components /> : null}
         <p>
-          <button>줄넘기 시작</button>
+          <button onClick={()=>{hideBtn(false)}}>줄넘기 시작</button>
         </p>
         <p>
-          <button>줄넘기 중지</button>
+          <button onClick={()=>{hideBtn(true) 
+            setCount(0)}}>줄넘기 중지</button>
         </p>
       </div>
     </>
