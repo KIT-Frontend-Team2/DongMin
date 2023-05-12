@@ -1,14 +1,25 @@
 import styled from "styled-components";
+import React from "react";
 
-function Comment() {
+
+function Comment({post,ReviseData,DeleteData}) {
   return (
     <S.CommentItem>
-      <p>
-        작성자: <span>예시 이름</span>
-      </p>
-      <p>
-        댓글 내용: <span>예시 내용</span>
-      </p>
+      {post.Comments.map((v,i)=>{
+       return(
+       <React.Fragment key={i}>
+        <p >
+          작성자: <span>{v.User.nickname}</span>
+        </p>
+        <p>
+          댓글 내용: <span>{v.content}</span>
+        </p>
+        <button onClick={()=>{ReviseData(v.User.nickname)}}>댓글 수정</button>
+        <button onClick={()=>{DeleteData(v.User.nickname,i)}}>댓글 삭제</button>
+
+      </React.Fragment>)
+      })}
+      
     </S.CommentItem>
   );
 }

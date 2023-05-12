@@ -62,7 +62,73 @@ function State2() {
       },
     ],
   });
+  const [writer,setWriter] =useState('')
+  const [comment,setComment] =useState('')
 
+
+  const AddData = (writer,comment)=>{
+    setPost((post) => ({
+       ...post,
+      ...post.User,
+      Comments: [
+          ...post.Comments
+          ,{
+        User: {
+          nickname: writer,
+        },
+        content: comment,
+        myComment: true}
+    ]
+  }))
+console.log(post)}
+
+
+  // console.log({...post}.Comments.length)
+  const ReviseData = (nickname)=>{
+    const reviseComment = prompt('댓글을 어떻게 수정하고 싶으신가요?')
+    setPost((post) => ({
+       ...post,
+      ...post.User,
+      Comments: [
+          ...post.Comments.map((v,i,arr)=>{
+            if (v.User.nickname===nickname){
+              return {User:{nickname:nickname},
+              content : reviseComment,
+              myComment: v.myComment
+            }
+            }else{
+              return v
+            
+            }
+          })
+          
+    ]
+  }))
+}
+
+
+  const DeleteData = (nickname,idx)=>{
+    setPost((post) => ({
+      ...post,
+     ...post.User,
+
+     Comments: 
+     [
+      ...post.Comments.map((v,i,arr)=>{
+        if (v.User.nickname===nickname&&i===idx&&v.myComment===true){
+        }else{
+          return v
+        }
+      })
+         
+   ].filter(element => element)
+ }))
+}
+
+
+  
+
+  // console.log(post.Comments)
   return (
     <S.Wrapper>
       <h1>문제2</h1>
@@ -85,14 +151,15 @@ function State2() {
         <p>
           댓글 수: <span>{post.Comments.length}</span>
         </p>
-        <input placeholder="작성자" />
-        <input placeholder="댓글 내용" />
-        <button>댓글 작성</button>
+        <input onChange={(e)=>{setWriter(e.target.value)}} placeholder="작성자" />
+        <input onChange={(e)=>{setComment(e.target.value)}} placeholder="댓글 내용" />
+        <button onClick={()=>{AddData(writer,comment)}}>댓글 작성</button>
       </div>
-      <S.CommentList>
+      <S.CommentList >
+        
         {/* list */}
         {/* 예시 데이터 */}
-        <Comment />
+        <Comment post={post} ReviseData={ReviseData} DeleteData={DeleteData}></Comment>
       </S.CommentList>
     </S.Wrapper>
   );

@@ -13,7 +13,7 @@ function State1() {
     삭제 버턴을 눌렀을 때 데이터가 삭제될 수 있도록 해주세요
   */
 
-  console.log(PlayListMock.playlist);
+  // console.log(PlayListMock.playlist);
   /* 데이터 콘솔에 찍어두었으니 확인해볼 것 */
   const [data,setData] = useState(PlayListMock.playlist)
   // console.log(data)
@@ -31,29 +31,22 @@ function State1() {
 
   const [title,setTitle] = useState('')
   const [singer,setSinger] =useState('')
-  const SetTitle = (e)=>{
-    setTitle(e.target.value)
-  }
 
-  const SetName = (e)=>{
-    setSinger(e.target.value)
-  }
   
   
   return (
     <>
       <h1>문제1</h1>
       <ul>
-        {data.map((v)=>{
+        {data.map((v,i)=>{
 
           return (
-          <>
-          <li>
+        
+          <li key={i}>
             <h3>{v.title}</h3>
             <p>{v.singer}</p>
           </li>
-          <hr/>
-          </>)
+          )
         })}
         <li>
           
