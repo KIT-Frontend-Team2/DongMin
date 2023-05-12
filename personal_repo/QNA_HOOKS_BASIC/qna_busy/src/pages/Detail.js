@@ -22,6 +22,8 @@ function DetailPage() {
       단, 없는 번호 상품으로 접근 시 state페이지로 돌아가도록 구현해주세요
     */}
     {!result && (<Navigate to="/state" replace={true} />)}
+    {!result === false ?
+    <>
     <div>{params.productNumber}</div>
     <S.Item >
       <h4>{dataActive[0].productName}</h4>
@@ -47,7 +49,7 @@ function DetailPage() {
           )
         })}
       </ul>
-    </S.Item>
+    </S.Item></>: null}
     </div>
   );
 }
