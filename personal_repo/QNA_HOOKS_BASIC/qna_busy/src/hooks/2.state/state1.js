@@ -1,4 +1,6 @@
 import PlayListMock from "../../__mock__/playList.json";
+import { useState } from "react";
+
 
 function State1() {
   /* 
@@ -13,27 +15,64 @@ function State1() {
 
   console.log(PlayListMock.playlist);
   /* 데이터 콘솔에 찍어두었으니 확인해볼 것 */
+  const [data,setData] = useState(PlayListMock.playlist)
+  // console.log(data)
+  const AddData = (songTitle,singer)=>{
+    const CopyData = [...data]
+    CopyData.push({title:songTitle,singer:singer})
+    setData(CopyData)
+  }
 
+  const DeleteData = (songTitle,singer)=>{
+    const CopyData = [...data]
+    let filtered = CopyData.filter(o => ((o.title !== songTitle)&&(o.singer !== singer)));
+    setData(filtered)
+  }
+
+  const [title,setTitle] = useState('')
+  const [singer,setSinger] =useState('')
+  const SetTitle = (e)=>{
+    setTitle(e.target.value)
+  }
+
+  const SetName = (e)=>{
+    setSinger(e.target.value)
+  }
+  
+  
   return (
     <>
       <h1>문제1</h1>
       <ul>
-        {/* list */}
-        {/* 예시 데이터입니다 */}
+        {data.map((v)=>{
+
+          return (
+          <>
+          <li>
+            <h3>{v.title}</h3>
+            <p>{v.singer}</p>
+          </li>
+          <hr/>
+          </>)
+        })}
         <li>
-          <h3>Summer</h3>
-          <p>Joe Hisaishi</p>
+          
         </li>
       </ul>
       <div>
         <p>
-          곡명 : <input />
+          곡명 : <input onChange={(e)=>{
+                setTitle(e.target.value)
+          }}/>
         </p>
         <p>
-          가수/작곡 : <input />
+          가수/작곡 : <input onChange={(e)=>{
+                setSinger(e.target.value)
+          }}/>
         </p>
         <p>
-          <button>추가</button>
+          <button onClick={()=>{AddData(title,singer)}}>추가</button>
+          <button onClick={()=>{DeleteData(title,singer)}}>삭제</button>
         </p>
       </div>
     </>

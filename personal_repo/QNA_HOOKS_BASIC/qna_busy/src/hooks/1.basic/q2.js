@@ -51,9 +51,9 @@ function Q2() {
 
         따라서 useRef는 사용하여 해당 문구의 색상을 변경해보세요 :)
   */
-  console.log(renderSubmit===[])
-  console.log(renderSubmit.length)
-  console.log([])
+  // console.log(renderSubmit===[])
+  // console.log(renderSubmit.length)
+  // console.log([])
   // const colorText = useRef('black')
 
  
