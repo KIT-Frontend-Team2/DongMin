@@ -12,7 +12,7 @@ function State3() {
 
     요구 사항
 
-    1. 구매후기 및 상제를 제외한 데이터의 모든 정보는 화면에 노출되어야 합니다.
+    1. 구매후기 및 상세 정보를 제외한 데이터의 모든 정보는 화면에 노출되어야 합니다.
         단, 가격표는 3자리마다 ,를 작성해야합니다.
 
     2. 해당 상품을 클릭하면 상세 페이지로 이동합니다.
@@ -40,12 +40,12 @@ function State3() {
         구매평을 추가할 수 있습니다 (수정 및 삭제는 state2에서 풀이하였으므로 구현하지 않아도 괜찮습니다)
   */
 
-  // console.log(productList);
+  console.log(productList.products);
 
   const navigate = useNavigate();
 
-  const onNavigateDetailPage = () => {
-    navigate(`/state/detail/1`);
+  const onNavigateDetailPage = (productNumber) => {
+    navigate(`/state/detail/${productNumber}`);
   };
 
   return (
@@ -53,9 +53,11 @@ function State3() {
       <h1>문제3</h1>
       <h2>상품 목록</h2>
       <ul>
-        {/* list */}
-        {/* 예시 데이터 */}
-        <ProductCard onNavigate={onNavigateDetailPage} />
+        {productList.products.map((product)=>{
+          return <ProductCard product={product} onNavigate={onNavigateDetailPage} />
+        })
+        }
+        
       </ul>
     </>
   );

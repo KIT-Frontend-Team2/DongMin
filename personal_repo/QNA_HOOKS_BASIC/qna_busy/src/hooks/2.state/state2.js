@@ -80,7 +80,7 @@ function State2() {
         myComment: true}
     ]
   }))
-console.log(post)}
+}
 
 
   // console.log({...post}.Comments.length)
