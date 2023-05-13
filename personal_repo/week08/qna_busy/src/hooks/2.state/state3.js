@@ -40,7 +40,7 @@ function State3() {
         구매평을 추가할 수 있습니다 (수정 및 삭제는 state2에서 풀이하였으므로 구현하지 않아도 괜찮습니다)
   */
 
-  console.log(productList.products);
+  // console.log(productList.products);
 
   const navigate = useNavigate();
 

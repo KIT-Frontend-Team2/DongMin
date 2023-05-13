@@ -2,16 +2,22 @@ import { useParams } from "react-router-dom";
 import productList from "../__mock__/products.json"
 import { redirect } from "react-router-dom";
 import { Navigate } from "react-router-dom";
+import { useEffect } from "react";
 import styled from "styled-components";
+
+
 function DetailPage() {
   const params = useParams();
-  console.log(params.productNumber);
+  // console.log(params.productNumber);
+
+
+
   // console.log(productList)
   const result = productList.products.some(val=>{return val.productNumber === params.productNumber;});
-  console.log(result)
+  // console.log(result)
   // const dataActive = productList.products.some(item => item.age > 30);
   let dataActive = productList.products.filter( item => item.productNumber  === params.productNumber );
-  console.log(dataActive)
+  // console.log(dataActive)
   return (
     <div>
       {/* 
