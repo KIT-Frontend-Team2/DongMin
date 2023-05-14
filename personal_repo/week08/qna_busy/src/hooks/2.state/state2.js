@@ -111,7 +111,6 @@ function State2() {
     setPost((post) => ({
       ...post,
      ...post.User,
-
      Comments: 
      [
       ...post.Comments.map((v,i,arr)=>{
@@ -119,9 +118,7 @@ function State2() {
         }else{
           return v
         }
-      })
-         
-   ].filter(element => element)
+      })].filter(element => element)
  }))
 }
 
