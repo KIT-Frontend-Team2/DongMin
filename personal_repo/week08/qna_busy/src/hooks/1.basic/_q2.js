@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 
 function Q2() {
   const arr = [];
+  const CopyArr = useRef()
   const [forceRender, setForceRender] = useState(false);
   const List = useRef(arr)
   // console.log(List.current)
@@ -9,17 +10,19 @@ function Q2() {
   const onAddList = () => {
     setForceRender((prev) => !prev);
     // arr.push(input);
-    List.current.push(input)
+    if (input !== '') List.current.push(input)
+    setHide(true)
+
   };
  
   const ChgInput =(e)=>{
     setInput(e.target.value)
   }
 
-  const [renderSubmit,setRenderSubmit] = useState([])
-
+  const [hide,setHide] = useState(true)
   const submitBtn = ()=>{
-    setRenderSubmit(List.current)
+    CopyArr.current=[...List.current]
+    setHide(false)
   }
   /* 
     문제2
@@ -51,7 +54,6 @@ function Q2() {
 
         따라서 useRef는 사용하여 해당 문구의 색상을 변경해보세요 :)
   */
-  // console.log(renderSubmit===[])
   // console.log(renderSubmit.length)
   // console.log([])
   // const colorText = useRef('black')
@@ -83,9 +85,10 @@ function Q2() {
         <p>
           <button onClick={submitBtn}>제출</button>
         </p>
-        {renderSubmit.length ===0 ? <p>제출된 목록이 없습니다</p> :<ul> {renderSubmit.map((v)=>{
-          return <li>{v}</li>
-        })}</ul>}
+      {hide ? (CopyArr.current===undefined ? null:CopyArr.current.map((v)=> {return <div>{v}</div>})):
+      List.current.length ===0 ? <div>제출할 목록이 없습니다</div>:
+      List.current.map((v)=>{return <div>{v}</div>})}
+       
       </div>
       <div>
         <h2>문제 2-2</h2>

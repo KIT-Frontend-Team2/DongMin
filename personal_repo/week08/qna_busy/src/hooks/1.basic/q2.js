@@ -14,6 +14,7 @@ function Q2() {
   const onAddList = () => {
     setForceRender((prev) => !prev);
     if (Input.current.value === "") return;
+    setShowList(false); // << 이거 수정
     arr.current.push(Input.current.value);
     Input.current.value = "";
   };
@@ -54,9 +55,11 @@ function Q2() {
           )}
           {/* showList가 true이고 arr.length가 0이 아닐때만(무언가 추가됨) 해당 
           list가 렌더링됨*/}
-          {showList &&
-            arrCopy.current.length !== 0 &&
-            arrCopy.current.map((text) => <li>{text}</li>)}
+          {showList === false ? 
+          (arrCopy.current === undefined) ? null:
+            arrCopy.current.map((text) => <li>{text}</li>) :
+            arr.current.map((text) => <li>{text}</li>)
+            }
         </ul>
       </div>
       <div>
