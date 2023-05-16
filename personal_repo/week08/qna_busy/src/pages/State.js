@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
-import State1 from "../hooks/2.state/state1";
-import State2 from "../hooks/2.state/state2";
-import State3 from "../hooks/2.state/state3";
+import State1 from "../hooks/2.state/state_1";
+import State2 from "../hooks/2.state/state_2";
+import State3 from "../hooks/2.state/state_3";
 
 function StatesPage() {
   const navigate = useNavigate();

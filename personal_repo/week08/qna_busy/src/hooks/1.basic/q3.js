@@ -27,16 +27,6 @@ function Q3() {
     setHide(!hide)
   }
   useEffect(()=>{
-  //  if (hide ===false){
-  //   let jump = setInterval(()=>{
-  //     setCount(count+1)
-  //   },2000)}
-    
-  //   return()=>{
-  //       setCount(0)
-  //       clearInterval(jump)
-      
-  //   }
   const intervalId = setInterval(() => {
       setCount(count+1)
 }, 2000);

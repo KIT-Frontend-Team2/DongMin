@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import Q1 from "../hooks/1.basic/q1";
-import Q2 from "../hooks/1.basic/_q2";
+import Q2 from "../hooks/1.basic/q2_";
 import Q3 from "../hooks/1.basic/q3";
 
 function HooksPage() {
