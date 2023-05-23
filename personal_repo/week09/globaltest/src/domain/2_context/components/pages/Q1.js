@@ -2,7 +2,7 @@ import { useState } from "react";
 import NavigateButton from "../../../../components/NavigateButton";
 import ContextQ1Detail from "../atom/Q1/Detail";
 import ContextQ1Modal from "../atom/Q1/Modal";
-
+import { useUseModal } from "../../../../store/2_context";
 const ContextQ1Page = () => {
   /* 
         문제 2-1)
@@ -19,12 +19,15 @@ const ContextQ1Page = () => {
         src/stor/2_context.js 파일에 context를 구현해주세요
     */
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
   // 위의 상태를 전역으로 관리하여 ContextQ1Detail, ContextQ1Detail2 두 컴포넌트의 보이기 버튼이 눌려도 모달창이 열릴 수 있도록 해주세요 :)
+  const [isModalOpenA, setIsModalOpenA, isModalOpenB, setIsModalOpenB] =
+    useUseModal();
 
   return (
     <div>
-      {isModalOpen && <ContextQ1Modal />}
+      {isModalOpenA === true && isModalOpenB === true ? (
+        <ContextQ1Modal />
+      ) : null}
       <h2>문제 2 - 1</h2>
       <ContextQ1Detail />
       <NavigateButton to={"/2_context/q2"} />
