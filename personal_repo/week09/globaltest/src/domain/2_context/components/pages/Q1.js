@@ -27,7 +27,10 @@ const ContextQ1Page = () => {
     <div>
       {isModalOpenA === true && isModalOpenB === true ? (
         <ContextQ1Modal />
-      ) : null}
+      ) : isModalOpenA === false && isModalOpenB === false ? null : null}
+      {/* {isModalOpenA === true && isModalOpenB === true ? (
+        <ContextQ1Modal />
+      ) : null} */}
       <h2>문제 2 - 1</h2>
       <ContextQ1Detail />
       <NavigateButton to={"/2_context/q2"} />

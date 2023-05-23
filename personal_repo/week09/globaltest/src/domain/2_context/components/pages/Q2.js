@@ -1,8 +1,7 @@
-import { useState } from "react";
 import NavigateButton from "../../../../components/NavigateButton";
 import ContextQ2Form from "../atom/Q2/Form";
 import ContextQ2Form3 from "../atom/Q2/Form3";
-
+import { useUserList } from "../../../../store/3_context";
 const ContextQ2Page = () => {
   /*
     문제 2 - 2
@@ -13,10 +12,6 @@ const ContextQ2Page = () => {
         (단, isEdit이 true인 데이터도 전역으로 관리해주세요.)
   */
 
-  const [userList, setUserList] = useState([
-    { id: 1, name: "홍길동", nickname: "히히" },
-  ]);
-
   /*
     단, userList 상태 관리는 전역으로 관리하고 비즈니스 로직도 분리하기 위해
     useReducer, useContext를 사용하여 구현해보세요
@@ -24,7 +19,13 @@ const ContextQ2Page = () => {
     (일반 state를 사용하는 문제가 아니기 때문에 전역으로 상태관리를 할 수 있도록 해주세요)
     관련 로직은 src/store/3_context.js에 구현해주세요
   */
-
+  const [user, dispatch] = useUserList();
+  const handleSubmit = () => {
+    dispatch({
+      type: "SUBMIT",
+    });
+    console.log(user);
+  };
   return (
     <>
       <h2>문제 2 - 2</h2>
@@ -35,7 +36,13 @@ const ContextQ2Page = () => {
           marginTop: "32px",
         }}
       >
-        <button>SUBMIT</button>
+        <button
+          onClick={() => {
+            handleSubmit();
+          }}
+        >
+          SUBMIT
+        </button>
       </div>
       <NavigateButton isLastPage />
     </>
